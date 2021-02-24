@@ -30,8 +30,8 @@ class Tasks extends BaseController
 
 	public function show($id){
       //$model = new \App\Models\TaskModel;
-	  $task = $this->model->find($id);
-	  //dd($task);
+      $task = $this->getTaskOr404($id);
+
 	  return view('Tasks/show',['task'=>$task]);
 	}
 
@@ -58,7 +58,7 @@ class Tasks extends BaseController
 
   public function edit($id){
 	//$model = new \App\Models\TaskModel;
-	$task = $this->model->find($id);
+	$task = $this->getTaskOr404($id);
 	
 	return view('Tasks/edit',['task'=>$task]);
   }
@@ -66,7 +66,7 @@ class Tasks extends BaseController
   public function update($id){
 	 //$model = new \App\Models\TaskModel;
 
-	 $task = $this->model->find($id);
+	 $task = $this->getTaskOr404($id);
 
 	 $task->fill($this->request->getPost());
 	 /*fill() is fast way to update record
@@ -89,5 +89,14 @@ class Tasks extends BaseController
 	   ->with('warning', 'Invalid data')
 	   ->withInput();
 	}
+  }
+
+  private function getTaskOr404($id){
+	$task = $this->model->find($id);
+	//dd($task);
+	if(!isset($task)){
+	   throw new \CodeIgniter\Exceptions\PageNotFoundException("Task with id $id not found"); 
+	}
+	return $task;
   }
 }
