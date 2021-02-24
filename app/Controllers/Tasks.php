@@ -6,6 +6,12 @@ use App\Entities\Task;
 
 class Tasks extends BaseController
 {
+	private $model;
+
+	public function __construct(){
+	  $this->model = new \App\Models\TaskModel;
+	}
+
 	public function index()
 	{
         /*$data = [
@@ -14,8 +20,8 @@ class Tasks extends BaseController
            //tasks become variable in the view
 		];*/
 
-		$model = new \App\Models\TaskModel;
-		$data = $model->findAll();
+		//$model = new \App\Models\TaskModel;
+		$data = $this->model->findAll();
 		//dd($data);
         
 		//echo view("header"); 
@@ -23,8 +29,8 @@ class Tasks extends BaseController
 	}
 
 	public function show($id){
-      $model = new \App\Models\TaskModel;
-	  $task = $model->find($id);
+      //$model = new \App\Models\TaskModel;
+	  $task = $this->model->find($id);
 	  //dd($task);
 	  return view('Tasks/show',['task'=>$task]);
 	}
@@ -35,32 +41,32 @@ class Tasks extends BaseController
 	}
 
 	public function create(){
-	  $model = new \App\Models\TaskModel;
+	  //$model = new \App\Models\TaskModel;
 
 	  $task = new Task($this->request->getPost());
 
-	  if($model->insert($task)){
-		return redirect()->to("/tasks/show/{$model->insertID}")
+	  if($this->model->insert($task)){
+		return redirect()->to("/tasks/show/{$this->model->insertID}")
 		->with('info','Task created successfully');
 	  }else{
 		return redirect()->back()
-		->with('errors',$model->errors())
+		->with('errors',$this->model->errors())
 		->with('warning', 'Invalid data')
 		->withInput();
 	}
   }
 
   public function edit($id){
-	$model = new \App\Models\TaskModel;
-	$task = $model->find($id);
+	//$model = new \App\Models\TaskModel;
+	$task = $this->model->find($id);
 	
 	return view('Tasks/edit',['task'=>$task]);
   }
 
   public function update($id){
-	 $model = new \App\Models\TaskModel;
+	 //$model = new \App\Models\TaskModel;
 
-	 $task = $model->find($id);
+	 $task = $this->model->find($id);
 
 	 $task->fill($this->request->getPost());
 	 /*fill() is fast way to update record
@@ -74,12 +80,12 @@ class Tasks extends BaseController
 	 }
 
 	 //save() it detect if we're inserting new object or updating existing one
-	 if($model->save($task)){
+	 if($this->model->save($task)){
 	  return redirect()->to("/tasks/show/$id")
 	  ->with('info', 'Task updated successfully');
     }else{
 	   return redirect()->back()
-	   ->with('errors', $model->errors())
+	   ->with('errors', $this->model->errors())
 	   ->with('warning', 'Invalid data')
 	   ->withInput();
 	}
