@@ -60,9 +60,21 @@ class Tasks extends BaseController
   public function update($id){
 	 $model = new \App\Models\TaskModel;
 
-	 $result = $model->update($id, ['description'=>$this->request->getPost('description')]);
-	 
-	 if($result){
+	 $task = $model->find($id);
+
+	 $task->fill($this->request->getPost());
+	 /*fill() is fast way to update record
+	 it sets all the properties we want to set on
+	 the object quickly*/
+    
+     if(!$task->hasChanged()){
+       return redirect()->back()
+	   ->with('warning', 'Nothing to update')
+	   ->withInput();
+	 }
+
+	 //save() it detect if we're inserting new object or updating existing one
+	 if($model->save($task)){
 	  return redirect()->to("/tasks/show/$id")
 	  ->with('info', 'Task updated successfully');
     }else{
