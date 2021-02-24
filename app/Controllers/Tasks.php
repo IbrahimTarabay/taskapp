@@ -1,4 +1,8 @@
-<?php namespace App\Controllers;
+<?php 
+
+namespace App\Controllers;
+
+use App\Entities\Task;
 
 class Tasks extends BaseController
 {
@@ -26,24 +30,23 @@ class Tasks extends BaseController
 	}
 
 	public function new(){
-	  $task = new \App\Entities\Task;
+	  $task = new Task;
 	  return view('Tasks/new', ['task'=>$task]);
 	}
 
 	public function create(){
 	  $model = new \App\Models\TaskModel;
 
-	  $result = $model->insert(['description'=>$this->request->getPost("description")]);
+	  $task = new Task($this->request->getPost());
 
-	  if($result===false){
+	  if($model->insert($task)){
+		return redirect()->to("/tasks/show/{$model->insertID}")
+		->with('info','Task created successfully');
+	  }else{
 		return redirect()->back()
 		->with('errors',$model->errors())
 		->with('warning', 'Invalid data')
 		->withInput();
-
-	  }else{
-	    return redirect()->to("/tasks/show/$result")
-		->with('info','Task created successfully');
 	}
   }
 
