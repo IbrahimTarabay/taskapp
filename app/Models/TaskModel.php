@@ -7,6 +7,8 @@ class TaskModel extends \CodeIgniter\Model{
   protected $allowedFields = ['description'];
   //fields that you can insert a value from form
 
+  protected $useTimestamps = true;
+
   protected $returnType = 'App\Entities\Task';
   protected $validationRules = ['description'=>'required'];
   protected $validationMessages = [
