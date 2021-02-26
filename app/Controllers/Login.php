@@ -22,7 +22,12 @@ class Login extends BaseController{
         ->with('warning','User not found');
       }else{
         if(password_verify($password, $user->password_hash)){
-          echo "Login Ok";
+          $session = session();
+          $session->regenerate();
+          $session->set('user_id',$user->id);
+
+          return redirect()->to("/")
+          ->with('info','Login Successful');
         }else{
           return redirect()->back()
           ->withInput()
