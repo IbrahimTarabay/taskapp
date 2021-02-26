@@ -7,12 +7,13 @@
     <h1>Welcome</h1>
 
     <a href="<?= site_url("/signup")?>">Sign up</a>
-    <a href="<?= site_url("/login")?>">Login</a>
 
     <?php if(session()->has('user_id')): ?>
       <p>User is logged in</p>
+      <a href="<?= site_url("/logout") ?>">Log out</a>
     <?php else: ?>
-      <p>User is not logged in</p>  
+      <p>User is not logged in</p>
+      <a href="<?= site_url("/login")?>">Login</a>  
     <?php endif; ?>  
 
 <?= $this->endSection() ?>
