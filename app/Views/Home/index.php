@@ -10,6 +10,7 @@
 
     <?php if(session()->has('user_id')): ?>
       <p>User is logged in</p>
+      <p>Hello<?= esc(current_user()->name)?></p>
       <a href="<?= site_url("/logout") ?>">Log out</a>
     <?php else: ?>
       <p>User is not logged in</p>
