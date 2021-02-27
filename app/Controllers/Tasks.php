@@ -20,12 +20,7 @@ class Tasks extends BaseController
            //tasks become variable in the view
 		];*/
 
-		//$model = new \App\Models\TaskModel;
-		if(!service('auth')->isLoggedIn()){
-           return redirect()->to('/login')
-		   ->with('info','Please Login first');
-		}
-		
+		//$model = new \App\Models\TaskModel;		
 		$data = $this->model->findAll();
 		//dd($data);
         
