@@ -21,6 +21,11 @@ class Tasks extends BaseController
 		];*/
 
 		//$model = new \App\Models\TaskModel;
+		if(!service('auth')->isLoggedIn()){
+           return redirect()->to('/login')
+		   ->with('info','Please Login first');
+		}
+		
 		$data = $this->model->findAll();
 		//dd($data);
         
