@@ -8,8 +8,11 @@ class Tasks extends BaseController
 {
 	private $model;
 
+	private $current_user;
+
 	public function __construct(){
 	  $this->model = new \App\Models\TaskModel;
+	  $this->current_user = service('auth')->getCurrentUser();
 	}
 
 	public function index()
@@ -19,11 +22,9 @@ class Tasks extends BaseController
 			['id' => 2, 'description' => 'Second task']
            //tasks become variable in the view
 		];*/
-        
-		$auth = service('auth');
-		$user = $auth->getCurrentUser();
+
 		//$model = new \App\Models\TaskModel;		
-		$data = $this->model->getTasksByUserId($user->id);
+		$data = $this->model->getTasksByUserId($this->current_user->id);
 		//dd($data);
         
 		//echo view("header"); 
@@ -46,10 +47,8 @@ class Tasks extends BaseController
 	  //$model = new \App\Models\TaskModel;
 
 	  $task = new Task($this->request->getPost());
-      
-      $user = service('auth')->getCurrentUser();
 
-	  $task->user_id = $user->id;
+	  $task->user_id = $this->current_user->id;
 
 	  if($this->model->insert($task)){
 		return redirect()->to("/tasks/show/{$this->model->insertID}")
@@ -114,13 +113,12 @@ class Tasks extends BaseController
   }
 
   private function getTaskOr404($id){
-	$user = service('auth')->getCurrentUser();
 	
 	/*$task = $this->model->find($id);
 	if($task !== null && ($task->user_id !== $user->id)){
        $task = null;
 	}*/
-	$task = $this->model->getTaskByUserId($id,$user->id);
+	$task = $this->model->getTaskByUserId($id,$this->current_user->id);
 	//dd($task);
 	if(!isset($task)){
 	   throw new \CodeIgniter\Exceptions\PageNotFoundException("Task with id $id not found"); 
