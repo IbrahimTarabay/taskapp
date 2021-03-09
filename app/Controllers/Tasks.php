@@ -46,6 +46,10 @@ class Tasks extends BaseController
 	  //$model = new \App\Models\TaskModel;
 
 	  $task = new Task($this->request->getPost());
+      
+      $user = service('auth')->getCurrentUser();
+
+	  $task->user_id = $user->id;
 
 	  if($this->model->insert($task)){
 		return redirect()->to("/tasks/show/{$this->model->insertID}")
@@ -69,8 +73,12 @@ class Tasks extends BaseController
 	 //$model = new \App\Models\TaskModel;
 
 	 $task = $this->getTaskOr404($id);
+     
+	 /*to prevent assign task to another user id when use submit form*/
+	 $post = $this->request->getPost();
+	 unset($post['user_id']);
 
-	 $task->fill($this->request->getPost());
+	 $task->fill($post);
 	 /*fill() is fast way to update record
 	 it sets all the properties we want to set on
 	 the object quickly*/
