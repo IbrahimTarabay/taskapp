@@ -19,9 +19,11 @@ class Tasks extends BaseController
 			['id' => 2, 'description' => 'Second task']
            //tasks become variable in the view
 		];*/
-
+        
+		$auth = service('auth');
+		$user = $auth->getCurrentUser();
 		//$model = new \App\Models\TaskModel;		
-		$data = $this->model->findAll();
+		$data = $this->model->getTasksByUserId($user->id);
 		//dd($data);
         
 		//echo view("header"); 
