@@ -106,7 +106,13 @@ class Tasks extends BaseController
   }
 
   private function getTaskOr404($id){
-	$task = $this->model->find($id);
+	$user = service('auth')->getCurrentUser();
+	
+	/*$task = $this->model->find($id);
+	if($task !== null && ($task->user_id !== $user->id)){
+       $task = null;
+	}*/
+	$task = $this->model->getTaskByUserId($id,$user->id);
 	//dd($task);
 	if(!isset($task)){
 	   throw new \CodeIgniter\Exceptions\PageNotFoundException("Task with id $id not found"); 
