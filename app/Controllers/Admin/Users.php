@@ -50,6 +50,14 @@ class Users extends \App\Controllers\BaseController{
   }
 }
 
+public function edit($id){
+	//$model = new \App\Models\TaskModel;
+	$user = $this->getUserOr404($id);
+	
+	return view('Admin/Users/edit',
+    ['user'=>$user]);
+}
+
   private function getUserOr404($id){
 
 	$user = $this->model->where('id',$id)
