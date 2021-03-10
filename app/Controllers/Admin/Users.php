@@ -94,6 +94,19 @@ public function update($id){
    }
  }
 
+ public function delete($id){
+    $user = $this->getUserOr404($id);
+
+    if($this->request->getMethod() === 'post'){
+      $this->model->delete($id);
+      return redirect()->to('/admin/users')
+      ->with('info', 'User Deleted');
+    }
+
+    return view('Admin/Users/delete',
+     ['user'=>$user]);
+ }
+
   private function getUserOr404($id){
 
 	$user = $this->model->where('id',$id)
