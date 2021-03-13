@@ -15,6 +15,9 @@
      <dt>email</dt>
      <dd><?= esc($user->email) ?></dd>
 
+     <dt>Administrator</dt>
+     <dd><?= $user->is_admin ? 'yes':'no' ?></dd>
+
      <dt>Created at</dt>
      <dd><?= $user->created_at ?></dd>
 
