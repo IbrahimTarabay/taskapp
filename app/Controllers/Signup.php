@@ -11,6 +11,9 @@ class Signup extends BaseController{
      $user = new \App\Entities\User($this->request->getPost());
      $model = new \App\Models\UserModel;
 
+     $token = bin2hex(random_bytes(16));
+     $hash = hash_hmac('sha256',$token,$_ENV['HASH_SECRET_KEY']);
+
      if($model->insert($user)){
         return redirect()->to("/signup/success");
      }else{
