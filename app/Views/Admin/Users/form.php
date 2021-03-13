@@ -22,6 +22,7 @@
  </div>
 
  <div>
+   <input type="hidden" name="is_admin" value="0">
    <label for="is_admin">
     <input type="checkbox" id="is_admin" name="is_admin" value="1"
      <?php if(old('is_admin',$user->is_admin)): ?>checked<?php endif; ?>>

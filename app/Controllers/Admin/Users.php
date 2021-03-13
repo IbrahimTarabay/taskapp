@@ -83,7 +83,7 @@ public function update($id){
     }
 
     //save() it detect if we're inserting new object or updating existing one
-    if($this->model->save($user)){
+    if($this->model->protect(false)->save($user)){
      return redirect()->to("/admin/users/show/$id")
      ->with('info', 'User updated successfully');
    }else{
