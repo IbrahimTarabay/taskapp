@@ -12,6 +12,7 @@ class Filters extends BaseConfig
 		'honeypot' => \CodeIgniter\Filters\Honeypot::class,
 		'login'    => \App\Filters\LoginFilter::class,
 		'guest'    => \App\Filters\GuestFilter::class,
+		'admin'    => \App\Filters\AdminFilter::class,
 	];
 
 	// Always applied before every request
@@ -35,8 +36,8 @@ class Filters extends BaseConfig
 	// that they should run on, like:
 	//    'isLoggedIn' => ['before' => ['account/*', 'profiles/*']],
 	public $filters = [
-	  'login'=>['before'=>
-	    ['tasks(/*)?','admin/*']]
+	  'login'=>['before'=>['tasks(/*)?','admin/*']],
+	  'admin'=>['before'=>['admin/*']]
 	  //This will run login filter before all your URLs that have tasks in the first segment
 	];
 }
