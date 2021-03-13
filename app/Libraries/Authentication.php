@@ -15,6 +15,9 @@ class Authentication{
       if(!$user->verifyPassword($password)){
           return false;
       }
+      if(!$user->is_active){
+        return false;
+      }
       $session = session();
       $session->regenerate();
       $session->set('user_id',$user->id);
