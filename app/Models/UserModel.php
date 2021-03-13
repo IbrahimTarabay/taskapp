@@ -4,7 +4,7 @@ namespace App\Models;
 
 class UserModel extends \CodeIgniter\Model{
   protected $table = 'user';
-  protected $allowedFields = ['name','email','password'];
+  protected $allowedFields = ['name','email','password','activation_hash'];
   protected $returnType = 'App\Entities\User';
   protected $useTimestamps = true;
   protected $validationRules = [
