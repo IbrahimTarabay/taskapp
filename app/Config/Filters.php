@@ -35,7 +35,8 @@ class Filters extends BaseConfig
 	// that they should run on, like:
 	//    'isLoggedIn' => ['before' => ['account/*', 'profiles/*']],
 	public $filters = [
-	  'login'=>['before'=>['tasks(/*)?']]
+	  'login'=>['before'=>
+	    ['tasks(/*)?','admin/*']]
 	  //This will run login filter before all your URLs that have tasks in the first segment
 	];
 }
