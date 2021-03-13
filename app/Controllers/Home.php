@@ -14,11 +14,14 @@ class Home extends BaseController
 	  $email->setSubject('A test email');
 	  $email->setMessage('<h1>Hi Hema</h1>');*/
 
+	  $headers = "MIME-Version: 1.0\r\n";
+	  $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+
 	  $sub = "A test email";
 	  $msg = "<h1>Hi Hema</h1>";
 	  $rec = "ibrahimesalah69@gmail.com";
     
-	  if(mail($rec,$sub,$msg)){
+	  if(mail($rec,$sub,$msg,$headers)){
         echo "Message Sent";
 	  }else{
 		 echo $email->printDebugger();

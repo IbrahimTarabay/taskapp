@@ -8,7 +8,7 @@ class User extends \CodeIgniter\Entity{
   }
 
   public function startActivation(){
-    $token = bin2hex(random_bytes(16));
-    $this->activation_hash = hash_hmac('sha256',$token,$_ENV['HASH_SECRET_KEY']);
+    $this->token = bin2hex(random_bytes(16));
+    $this->activation_hash = hash_hmac('sha256',$this->token,$_ENV['HASH_SECRET_KEY']);
   }
 }
