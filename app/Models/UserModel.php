@@ -6,7 +6,8 @@ use App\Libraries\Token;
 
 class UserModel extends \CodeIgniter\Model{
   protected $table = 'user';
-  protected $allowedFields = ['name','email','password','activation_hash'];
+  protected $allowedFields = ['name','email','password',
+  'activation_hash','reset_hash','reset_expires_at'];
   protected $returnType = 'App\Entities\User';
   protected $useTimestamps = true;
   protected $validationRules = [
