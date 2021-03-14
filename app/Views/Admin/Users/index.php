@@ -16,6 +16,7 @@
     <tr>
      <th>Name</th>
      <th>email</th>
+     <th>Active</th>
      <th>Administrator</th>
      <th>Created at</th>
     </tr>
@@ -30,6 +31,7 @@
         </a>
      </td>
      <td><?= esc($user->email) ?></td>
+     <td><?= $user->is_active ? 'yes':'no' ?></td>
      <td><?= $user->is_admin ? 'yes':'no' ?></td>
      <td><?= $user->created_at ?></td>
     </tr>
