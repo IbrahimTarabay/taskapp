@@ -26,6 +26,18 @@ class Password extends BaseController{
     return view('Password/reset_sent');
   }
 
+  public function reset($token){
+    $model = new \App\Models\UserModel;
+    $user = $model->getUserForPasswordReset($token);
+
+    if($user){
+      return view('Password/reset',['token'=>$token]);
+    }else{
+      return redirect()->to('/password/forgot')
+      ->with('warning','Link invalid or has expired, Please try again');
+    }
+  }
+
   public function sendResetEmail($user){
 
     $headers = "MIME-Version: 1.0\r\n";
