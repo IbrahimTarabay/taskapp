@@ -30,17 +30,21 @@ class Authentication{
     }
 
     function getCurrentUser(){
-        if(!$this->isLoggedIn()){
+        if(!session()->has('user_id')){
           return null;
         }
         if($this->user===null){
         $model = new \App\Models\UserModel;
         $this->user = $model->find(session()->get('user_id'));
+
+        if($user&&$user->is_active){
+          $this->user = $user;
+        }
       }
       return $this->user;
     }
 
     public function isLoggedIn(){
-      return session()->has('user_id');
+      return $this->getCurrentUser() !== null;
     }
 }
