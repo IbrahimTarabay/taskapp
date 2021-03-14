@@ -29,6 +29,12 @@ class Signup extends BaseController{
     return view('Signup/success');
   }
 
+  public function activate($token){
+     $model = new \App\Models\UserModel;
+     $model->activateByToken($token);
+     return view('Signup/activated');
+  }
+
   public function sendActivationEmail($user){
 
     $headers = "MIME-Version: 1.0\r\n";

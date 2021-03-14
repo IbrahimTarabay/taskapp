@@ -44,4 +44,15 @@ class UserModel extends \CodeIgniter\Model{
     unset($this->validationRules['password']);
     unset($this->validationRules['password_confirmation']);
   }
+
+  public function activateByToken($token){
+    $token_hash = hash_hmac('sha256',$token,$_ENV['HASH_SECRET_KEY']);
+    $user = $this->where('activation_hash',$token_hash)->first();
+
+    if(isset($user)){
+      $user->activate();
+      $this->protect(false)->save($user);
+      //to update user record
+    }
+  }
 }
