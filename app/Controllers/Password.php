@@ -38,6 +38,31 @@ class Password extends BaseController{
     }
   }
 
+  public function processReset($token){
+    $model = new \App\Models\UserModel;
+    $user = $model->getUserForPasswordReset($token);
+
+    if($user){
+      $user->fill($this->request->getPost());
+      if($model->save($user)){
+        $user->completePasswordReset();
+        $model->save($user);
+        return redirect()->to('/password/resetsuccess');
+      }else{
+        return redirect()->back()
+        ->with('errors', $model->errors())
+        ->with('warning','Invalid data');
+      }
+    }else{
+      return redirect()->to('/password/forgot')
+        ->with('warning','Link invalid or has expired. Please try again');
+    }
+  }
+
+  public function resetSuccess(){
+    return view('Password/reset_success');
+  }
+
   public function sendResetEmail($user){
 
     $headers = "MIME-Version: 1.0\r\n";

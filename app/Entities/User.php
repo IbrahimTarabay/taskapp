@@ -26,4 +26,9 @@ class User extends \CodeIgniter\Entity{
     $this->reset_hash = $token->getHash();
     $this->reset_expires_at = date('Y-m-d H:i:s',time()+3600);
   }
+
+  public function completePasswordReset(){
+    $this->reset_hash = null;
+    $this->reset_expires_at = null;
+  }
 }
