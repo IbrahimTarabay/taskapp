@@ -40,6 +40,23 @@ class Profile extends BaseController{
   public function editPassword(){
     return view('Profile/edit_password');
   }
-}
 
-  
+  public function updatePassword(){
+    if(!$this->user->verifyPassword($this->request->getPost('current_password'))){
+      return redirect()->back()
+      ->with('warning', 'Invalid current password');
+    }
+
+    $this->user->fill($this->request->getPost());
+    $model = new \App\Models\UserModel;
+
+    if($model->save($this->user)){
+      return redirect()->to("/profile/show")
+      ->with('info','Password updated successfully');
+    }else{
+      return redirect()->back()
+      ->with('errors',$model->errors())
+      ->with('warning','Invalid data');
+    }
+  }
+}  
