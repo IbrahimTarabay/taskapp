@@ -11,6 +11,7 @@
   
  <?php if(current_user()): ?>
     <p>Hello <?= esc(current_user()->name)?></p>
+    <a href="<?= site_url("/profile/show") ?>">Profile</a>
     
     <?php if(current_user()->is_admin): ?>
      <a href="<?= site_url("/admin/users") ?>">Users</a>
