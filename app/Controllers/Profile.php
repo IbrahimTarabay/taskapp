@@ -15,6 +15,27 @@ class Profile extends BaseController{
   public function edit(){
     return view('Profile/edit',['user'=>$this->user]);
   }
+
+  public function update(){
+    $this->user->fill($this->request->getPost());
+
+    if(!$this->user->hasChanged()){
+      return redirect()->back()
+      ->with('warning','Nothing to update')
+      ->withInput();
+    }
+
+    $model = new \App\Models\UserModel;
+    if($model->save($this->user)){
+      return redirect()->to("/profile/show")
+      ->with('info', 'Details updated successfully');
+    }else{
+      return redirect()->back()
+      ->with('errors', $model->errors())
+      ->with('warning', 'Invalid data')
+      ->withInput();
+    }
+  }
 }
 
   
