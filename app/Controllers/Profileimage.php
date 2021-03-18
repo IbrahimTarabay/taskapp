@@ -19,5 +19,18 @@ class Profileimage extends BaseController{
       }
       throw new \RuntimeException($file->getErrorString(). " " .$error_code);
     }
+
+    $size = $file->getSizeByUnit('mb');
+    if($size > 2){
+      return redirect()->back()
+      ->with('warning', 'File too large (max 2MB)');
+    }
+    $type = $file->getMimeType();
+
+    if(!in_array($type, ['image/png', 'image/jpeg', 'image/jpg'])){
+      return redirect()->back()
+      ->with('warning', 'Invalid file format (PNG or JPEG or JPG only)');
+    }
+    echo $file->getClientName();
   }
 }
