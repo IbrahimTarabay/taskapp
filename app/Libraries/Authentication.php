@@ -4,7 +4,7 @@ namespace App\Libraries;
 
 class Authentication{
     private $user;
-    public function login($email,$password){
+    public function login($email,$password,$remember_me){
       $model = new \App\Models\UserModel;
       
       $user = $model->findByEmail($email);
@@ -22,7 +22,16 @@ class Authentication{
       $session->regenerate();
       $session->set('user_id',$user->id);
 
+      if($remember_me){
+        $this->rememberLogin($user->id);
+      }
+
       return true;
+    }
+
+    private function rememberLogin($user_id){
+      $model = new \App\Models\RememberedLoginModel;
+      $model->rememberUserLogin($user_id);
     }
 
     public function logout(){

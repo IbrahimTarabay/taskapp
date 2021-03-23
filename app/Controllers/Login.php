@@ -13,7 +13,7 @@ class Login extends BaseController{
       $remember_me = (bool) $this->request->getPost('remember_me');
 
       $auth = service('auth');
-      if($auth->login($email,$password)){
+      if($auth->login($email,$password,$remember_me)){
         $redirect_url = session('redirect_url') ?? '/';
         unset($_SESSION['redirect_url']);
         return redirect()->to($redirect_url)
