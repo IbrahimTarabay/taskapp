@@ -32,5 +32,11 @@ class Profileimage extends BaseController{
       ->with('warning', 'Invalid file format (PNG or JPEG or JPG only)');
     }
     $path = $file->store('profile_images');
+    $path = WRITEPATH . 'uploads/' . $path;
+
+    service('image')
+    ->withFile($path)
+    ->fit(200,200,'center')
+    ->save($path);
   }
 }
