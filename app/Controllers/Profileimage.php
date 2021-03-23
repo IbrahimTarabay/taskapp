@@ -31,6 +31,6 @@ class Profileimage extends BaseController{
       return redirect()->back()
       ->with('warning', 'Invalid file format (PNG or JPEG or JPG only)');
     }
-    echo $file->getClientName();
+    $path = $file->store('profile_images');
   }
 }
