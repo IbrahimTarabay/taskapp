@@ -47,4 +47,23 @@ class Profileimage extends BaseController{
     return redirect()->to("/profile/show")
     ->with('info', 'Image uploaded successfully');
   }
+
+  public function delete(){
+
+   if($this->request->getMethod()==='post'){ 
+    $user = service('auth')->getCurrentUser();
+    $path = WRITEPATH . 'uploads/profile_images/' . $user->profile_image;
+
+    if(is_file($path)){
+      unlink($path);
+    }
+    $user->profile_image = null;
+    $model = new \App\Models\UserModel;
+    $model->protect(false)->save($user);
+
+    return redirect()->to('/profile/show')
+    ->with('info', 'Image deleted');
+   }
+    return view('Profileimage/delete');
+  }
 }
