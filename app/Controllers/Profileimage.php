@@ -38,5 +38,13 @@ class Profileimage extends BaseController{
     ->withFile($path)
     ->fit(200,200,'center')
     ->save($path);
+
+    $user = service('auth')->getCurrentUser();
+    $user->profile_image = $file->getName();
+    $model = new \App\Models\UserModel;
+    $model->protect(false)->save($user);
+
+    return redirect()->to("/profile/show")
+    ->with('info', 'Image uploaded successfully');
   }
 }
