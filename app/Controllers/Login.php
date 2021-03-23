@@ -10,6 +10,7 @@ class Login extends BaseController{
     public function create(){
       $email = $this->request->getPost('email');
       $password = $this->request->getPost('password');
+      $remember_me = (bool) $this->request->getPost('remember_me');
 
       $auth = service('auth');
       if($auth->login($email,$password)){
