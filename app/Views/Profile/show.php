@@ -4,7 +4,15 @@
 
 <?= $this->section("content") ?>
 
-    <h1>Profile</h1>
+<h1>Profile</h1>
+
+<?php if($user->profile_image): ?>
+
+<?php else: ?>
+
+ <img src="<?= site_url('/images/blank_profile.png') ?>" width="200" height="200" alt="profile image">
+
+<?php endif; ?>
 
  <dl>
   <dt>Name</dt>
