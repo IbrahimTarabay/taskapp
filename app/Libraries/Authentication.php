@@ -18,15 +18,20 @@ class Authentication{
       if(!$user->is_active){
         return false;
       }
-      $session = session();
-      $session->regenerate();
-      $session->set('user_id',$user->id);
+        
+      $this->logInUser($user);
 
       if($remember_me){
         $this->rememberLogin($user->id);
       }
 
       return true;
+    }
+
+    private function logInUser($user){
+      $session = session();
+      $session->regenerate();
+      $session->set('user_id',$user->id);
     }
 
     private function rememberLogin($user_id){
@@ -40,17 +45,22 @@ class Authentication{
       session()->destroy();
     }
 
-    function getCurrentUser(){
-        if(! session()->has('user_id')){
-          return null;
-        }
-        if($this->user === null){
-        $model = new \App\Models\UserModel;
-        $user = $model->find(session()->get('user_id'));
+    public function getUserFromSession(){
+      if(! session()->has('user_id')){
+        return null;
+      } 
 
-        if($user && $user->is_active){
-          $this->user = $user;
-        }
+      $model = new \App\Models\UserModel;
+      $user = $model->find(session()->get('user_id'));
+
+      if($user && $user->is_active){
+        return $user;
+      }
+    }
+
+    function getCurrentUser(){
+      if($this->user === null){
+        $this->user = $this->getUserFromSession();
       }
       return $this->user;
     }
