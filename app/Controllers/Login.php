@@ -29,7 +29,8 @@ class Login extends BaseController{
     public function delete(){
       $auth = service('auth');
       $auth->logout();
-      return redirect()->to('/login/showLogoutMessage');
+      return redirect()->to('/login/showLogoutMessage')
+      ->withCookies();//to include headers in global object to delete it also
     }
 
     public function showLogoutMessage(){

@@ -42,6 +42,13 @@ class Authentication{
     }
 
     public function logout(){
+      $token = service('request')->getCookie('remember_me');
+
+      if($token !== null){
+       $model = new \App\Models\RememberedLoginModel;
+       $model->deleteByToken($token);
+      }
+      service('response')->deleteCookie('remember_me');
       session()->destroy();
     }
 
@@ -67,7 +74,7 @@ class Authentication{
       }
 
       $remembered_login_model = new \App\Models\RememberedLoginModel;
-      $remember_login = $remembered_login_model->findByToken($token);
+      $remembered_login = $remembered_login_model->findByToken($token);
 
       if($remembered_login === null){
         return null;
