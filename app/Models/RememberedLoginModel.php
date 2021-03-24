@@ -25,4 +25,16 @@ class RememberedLoginModel extends \CodeIgniter\Model{
       $expiry
     ];
   }
+
+  public function findByToken($token){
+    $token = new Token($token);
+    $token_hash = $token->getHash();
+    $remembered_login = $this->where('token_hash', $token_hash)->first();
+
+    if($remembered_login){
+      if($remembered_login['expires_at'] > date('Y-m-d H:i:s')){
+        return $remembered_login;
+      }
+    }
+  }
 }

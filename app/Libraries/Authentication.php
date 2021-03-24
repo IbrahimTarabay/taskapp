@@ -58,10 +58,38 @@ class Authentication{
       }
     }
 
+    private function getUserFromRememberCookie(){
+      $request = service('request');
+      $token = $request->getCookie('remember_me');
+
+      if($token === null){
+        return null;        
+      }
+
+      $remembered_login_model = new \App\Models\RememberedLoginModel;
+      $remember_login = $remembered_login_model->findByToken($token);
+
+      if($remembered_login === null){
+        return null;
+      }
+
+      $user_model = new \App\Models\UserModel;
+      $user = $user_model->find($remembered_login['user_id']);
+
+      if($user && $user->is_active){
+       $this->logInUser($user);
+       return $user;
+      }
+    }
+
     function getCurrentUser(){
       if($this->user === null){
         $this->user = $this->getUserFromSession();
       }
+      if($this->user === null){
+        $this->user = $this->getUserFromRememberCookie();
+      }
+
       return $this->user;
     }
 
