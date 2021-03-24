@@ -43,4 +43,9 @@ class RememberedLoginModel extends \CodeIgniter\Model{
     $token_hash = $token->getHash();
     $this->where('token_hash',$token_hash)->delete();
   }
+
+  public function deleteExpired(){
+    $this->where('expires_at <', date('Y-m-d H:i:s'))->delete();
+    return $this->db->affectedRows();
+  }
 }
