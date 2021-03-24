@@ -31,7 +31,9 @@ class Authentication{
 
     private function rememberLogin($user_id){
       $model = new \App\Models\RememberedLoginModel;
-      $model->rememberUserLogin($user_id);
+      list($token,$expiry) = $model->rememberUserLogin($user_id);
+      $response = service('response');
+      $response->setCookie('remember_me',$token,$expiry);
     }
 
     public function logout(){

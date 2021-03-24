@@ -17,7 +17,8 @@ class Login extends BaseController{
         $redirect_url = session('redirect_url') ?? '/';
         unset($_SESSION['redirect_url']);
         return redirect()->to($redirect_url)
-        ->with('info','Login Successful');
+        ->with('info','Login Successful')
+        ->withCookies();
       }else{
         return redirect()->back()
         ->withInput()

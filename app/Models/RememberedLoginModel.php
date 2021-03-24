@@ -19,5 +19,10 @@ class RememberedLoginModel extends \CodeIgniter\Model{
       'expires_at'=>date('Y-m-d H:i:s' ,$expiry)
     ];
     $this->insert($data);
+
+    return [
+      $token->getValue(),
+      $expiry
+    ];
   }
 }
