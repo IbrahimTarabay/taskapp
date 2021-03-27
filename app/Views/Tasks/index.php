@@ -8,7 +8,7 @@
 
   <h1>Tasks</h1>
 
-  <a href="<?= site_url("/tasks/new") ?>">New task</a>
+  <a class="button" href="<?= site_url("/tasks/new") ?>">New task</a>
 
   <div>
     <label for="query">Search</label>

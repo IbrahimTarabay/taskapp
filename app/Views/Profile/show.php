@@ -4,11 +4,13 @@
 
 <?= $this->section("content") ?>
 
-<h1>Profile</h1>
+<h1 class="title">Profile</h1>
 
 <?php if($user->profile_image): ?>
     <img src="<?= site_url('/profile/image') ?>" width="200" height="200" alt="profile image">
-    <a href="<?= site_url("/profileimage/delete") ?>">Delete Profile image</a>
+    <div>
+     <a class="button is-danger is-light" href="<?= site_url("/profileimage/delete") ?>">Delete Profile image</a>
+    </div> 
 <?php else: ?>
 
  <img src="<?= site_url('/images/blank_profile.png') ?>" width="200" height="200" alt="profile image">
@@ -23,8 +25,8 @@
   <dd><?= esc($user->email) ?></dd> 
  </dl>    
 
- <a href="<?= site_url("/profile/edit") ?>">Edit</a>
- <a href="<?= site_url("/profile/editpassword") ?>">Change password</a>
- <a href="<?= site_url("/profileimage/edit") ?>">Change profile image</a>
+ <a class="button is-link" href="<?= site_url("/profile/edit") ?>">Edit</a>
+ <a class="button is-link" href="<?= site_url("/profile/editpassword") ?>">Change password</a>
+ <a class="button is-link" href="<?= site_url("/profileimage/edit") ?>">Change profile image</a>
 
 <?= $this->endSection() ?>
