@@ -10,6 +10,11 @@
 
   <a href="<?= site_url("/tasks/new") ?>">New task</a>
 
+  <div>
+    <label for="query">Search</label>
+    <input name="query" id="query">
+  </div>
+
  <?php if ($tasks): ?>
   <ul>
     <?php foreach($tasks as $task): ?>
@@ -28,5 +33,20 @@
  <?php endif; ?>
 
  <script src="<?= site_url('/js/auto-complete.min.js') ?>"></script>
+
+ <script>
+   var searchUrl = "<?= site_url('/tasks/search?q=another') ?>";
+
+   document.getElementById('query').onclick = function(e){
+     var request = new XMLHttpRequest();
+     request.open('GET', searchUrl,true);
+     request.onload = function(){
+       console.log(this.response);
+       data = JSON.parse(this.response);
+       console.log(data);
+     };
+     request.send();
+   };
+ </script>
 
 <?= $this->endSection() ?> 
