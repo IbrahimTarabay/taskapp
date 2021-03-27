@@ -35,18 +35,22 @@
  <script src="<?= site_url('/js/auto-complete.min.js') ?>"></script>
 
  <script>
-   var searchUrl = "<?= site_url('/tasks/search?q=another') ?>";
-
-   document.getElementById('query').onclick = function(e){
-     var request = new XMLHttpRequest();
-     request.open('GET', searchUrl,true);
-     request.onload = function(){
-       console.log(this.response);
+   var searchUrl = "<?= site_url('/tasks/search?q=') ?>";
+    
+   var searchAutoComplete = new autoComplete({
+     selector: 'input[name="query"]',
+     cache: false,
+     source: function(term, response){
+      var request = new XMLHttpRequest();
+      request.open('GET', searchUrl+term,true);
+      request.onload = function(){
        data = JSON.parse(this.response);
-       console.log(data);
+       var suggestions = data.map(task => task.description);
+       response(suggestions);
      };
      request.send();
-   };
+     }
+   });
  </script>
 
 <?= $this->endSection() ?> 
