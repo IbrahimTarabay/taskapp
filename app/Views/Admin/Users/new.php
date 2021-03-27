@@ -3,7 +3,7 @@
 <?= $this->section("title") ?>New user<?= $this->endSection() ?>
 
 <?= $this->section("content") ?>
-  <h1>New user</h1>
+  <h1 class="title">New user</h1>
 
   <?php if(session()->has('errors')): ?>
     <ul>
@@ -13,12 +13,22 @@
     </ul>
    <?php endif ?>
 
-<?= form_open("/admin/users/create") ?>
+  <div class="container">
+    <?= form_open("/admin/users/create") ?>
 
- <?= $this->include('Admin/Users/form') ?>
+    <?= $this->include('Admin/Users/form') ?>
 
- <button>Save</button>
- <a href="<?= site_url("/admin/users") ?>">Cancel</a>
-</form>
+  <div class="field is-grouped">
+   <div class="control">
+    <button class="button is-primary">Save</button>
+   </div>
+
+   <div class="control">   
+    <a class="button" href="<?= site_url("/admin/users") ?>">Cancel</a>
+   </div>
+
+   </div>
+    </form>
+  </div>
 
 <?= $this->endSection() ?>
