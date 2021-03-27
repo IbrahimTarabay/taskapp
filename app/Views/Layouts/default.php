@@ -9,25 +9,31 @@
 </head>
 <body>
 
- <section class="section">
+<section class="section">
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+   <div class="navbar-menu">
+    <div class="navbar-start">
+     <a class="navbar-item" href="<?= site_url("/") ?>">Home</a>
+    </div>
 
- <a href="<?= site_url("/") ?>">Home</a>
-  
- <?php if(current_user()): ?>
-    <p>Hello <?= esc(current_user()->name)?></p>
-    <a href="<?= site_url("/profile/show") ?>">Profile</a>
-    
-    <?php if(current_user()->is_admin): ?>
-     <a href="<?= site_url("/admin/users") ?>">Users</a>
-    <?php endif; ?>
+  <div class="navbar-end">
+    <?php if(current_user()): ?>
+        <div class="navbar-item">Hello <?= esc(current_user()->name)?></div>
+        <a class="navbar-item" href="<?= site_url("/profile/show") ?>">Profile</a>
+        
+        <?php if(current_user()->is_admin): ?>
+        <a class="navbar-item" href="<?= site_url("/admin/users") ?>">Users</a>
+        <?php endif; ?>
 
-    <a href="<?= site_url("/tasks") ?>">Tasks</a>
-    <a href="<?= site_url("/logout") ?>">Log out</a>
-  <?php else: ?>
-    <a href="<?= site_url("/signup")?>">Sign up</a>
-    <a href="<?= site_url("/login")?>">Login</a>  
-  <?php endif; ?> 
-
+        <a class="navbar-item" href="<?= site_url("/tasks") ?>">Tasks</a>
+        <a class="navbar-item" href="<?= site_url("/logout") ?>">Log out</a>
+      <?php else: ?>
+        <a class="navbar-item" href="<?= site_url("/signup")?>">Sign up</a>
+        <a class="navbar-item" href="<?= site_url("/login")?>">Login</a>  
+      <?php endif; ?> 
+    </div>
+   </div>
+  </nav>
 
   <?php if(session()->has('warning')): ?>
     <div class="warning">
