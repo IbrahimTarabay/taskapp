@@ -27,4 +27,6 @@
   <p>No tasks found.</p>
  <?php endif; ?>
 
+ <script src="<?= site_url('/js/auto-complete.min.js') ?>"></script>
+
 <?= $this->endSection() ?> 
