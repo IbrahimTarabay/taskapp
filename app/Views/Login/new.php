@@ -5,27 +5,34 @@
 <?= $this->section("content") ?>
 
     <h1 class="title">Login</h1>
+
+<div class="container">    
  <?= form_open("/login/create") ?>
 
-   <div>
-     <label for="email">email</label>
-     <input type="text" name="email" id="email" value="<?= old('email') ?>">
+   <div class="field">
+     <label class="label" for="email">email</label>
+     <input class="input" type="text" name="email" id="email" value="<?= old('email') ?>">
    </div>
 
-   <div>
-     <label for="password">Password</label>
-     <input type="password" name="password">
+   <div class="field">
+     <label class="label" for="password">Password</label>
+     <input class="input" type="password" name="password">
    </div>
 
-   <div>
-     <label for="remember_me">
+   <div class="field">
+     <label class="checkbox" for="remember_me">
       <input type="checkbox" id="remember_me" name="remember_me"
        <?php if(old('remember_me')): ?>checked<?php endif; ?>>remember me
    </div>
 
+ <div class="field is-grouped">
+  <div class="control">
    <button>Login</button>
+ </div>
 
    <a href="<?= site_url("/password/forgot") ?>">Forgot Password</a>
+  </div>
  </form>
+</div>
 
 <?= $this->endSection() ?>
