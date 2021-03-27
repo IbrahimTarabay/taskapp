@@ -17,13 +17,15 @@
 
 <?php endif; ?>
 
+<div class="content">
  <dl>
-  <dt>Name</dt>
+  <dt class="has-text-weight-bold">Name</dt>
   <dd><?= esc($user->name) ?></dd>
 
-  <dt>Email</dt>
+  <dt class="has-text-weight-bold">Email</dt>
   <dd><?= esc($user->email) ?></dd> 
  </dl>    
+</div>
 
  <a class="button is-link" href="<?= site_url("/profile/edit") ?>">Edit</a>
  <a class="button is-link" href="<?= site_url("/profile/editpassword") ?>">Change password</a>

@@ -27,7 +27,7 @@
 
  <div class="field is-grouped">
   <div class="control">
-   <button>Login</button>
+   <button class="button is-primary">Login</button>
  </div>
 
    <a href="<?= site_url("/password/forgot") ?>">Forgot Password</a>
