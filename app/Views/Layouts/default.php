@@ -36,19 +36,22 @@
   </nav>
 
   <?php if(session()->has('warning')): ?>
-    <div class="warning">
+    <div class="notification is-warning is-light">
+      <button class="delete"></button>
       <?= session('warning'); ?>
     </div>
   <?php endif; ?>  
   
   <?php if(session()->has('info')): ?>
-    <div class="info">
+    <div class="notification is-info is-light">
+      <button class="delete"></button>
       <?= session('info'); ?>
     </div>
   <?php endif; ?> 
 
   <?php if(session()->has('error')): ?>
-    <div class="error">
+    <div class="notification is-danger is-light">
+      <button class="delete"></button>
       <?= session('error'); ?>
     </div>
   <?php endif; ?> 
@@ -56,6 +59,9 @@
   <?= $this->renderSection("content") ?>
  
  </section>
+
+ <script src="<?= site_url('/js/app.js') ?>"></script>
+
 </body>
 </html>
 
