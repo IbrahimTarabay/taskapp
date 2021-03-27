@@ -9,6 +9,8 @@
 </head>
 <body>
 
+ <section class="section">
+
  <a href="<?= site_url("/") ?>">Home</a>
   
  <?php if(current_user()): ?>
@@ -46,7 +48,8 @@
   <?php endif; ?> 
 
   <?= $this->renderSection("content") ?>
-
+ 
+ </section>
 </body>
 </html>
 
