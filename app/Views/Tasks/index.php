@@ -6,7 +6,7 @@
 
 <?= $this->section("content") ?>
 
-  <h1>Tasks</h1>
+  <h1 class="title">Tasks</h1>
 
   <a class="button" href="<?= site_url("/tasks/new") ?>">New task</a>
 
@@ -26,7 +26,7 @@
     <?php endforeach; ?> 
   </ul>
 
-<?= $pager->links() ?>
+<?= $pager->simpleLinks() ?>
 
  <?php else: ?>
   <p>No tasks found.</p>

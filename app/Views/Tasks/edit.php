@@ -3,7 +3,7 @@
 <?= $this->section("title") ?>Edit Task<?= $this->endSection() ?>
 
 <?= $this->section("content") ?>
-  <h1>Edit Task</h1>
+  <h1 class="title">Edit Task</h1>
 
   <?php if(session()->has('errors')): ?>
     <ul>
@@ -16,8 +16,8 @@
 
   <?= $this->include('Tasks/form') ?>
 
- <button>Save</button>
- <a href="<?= site_url("/tasks/show/".$task->id) ?>">Cancel</a>
+ <button class="button is-primary">Save</button>
+ <a class="button" href="<?= site_url("/tasks/show/".$task->id) ?>">Cancel</a>
 </form>
 
 <?= $this->endSection() ?>
