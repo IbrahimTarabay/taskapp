@@ -17,13 +17,13 @@ class UserModel extends \CodeIgniter\Model{
       'password_confirmation'=>'required|matches[password]'
   ];
   protected $validationMessages = [
-     'email'=>[
-       'is_unique'=>'That email address is taken'
+      'email' => [
+        'is_unique' => 'User.email.is_unique'
      ],
-     'password_confirmation'=>[
-        'required'=>'Please confirm the password',
-        'matches'=>'Please enter the same password again'
-     ]
+    'password_confirmation' => [
+        'required' => 'User.password_confirmation.required',
+        'matches' => 'User.password_confirmation.matches'
+    ]
   ];
   protected $beforeInsert = ['hashPassword'];
   protected $beforeUpdate = ['hashPassword'];
