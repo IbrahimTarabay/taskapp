@@ -19,7 +19,7 @@ class Signup extends BaseController{
      }else{
         return redirect()->back()
         ->with('errors',$model->errors())
-        ->with('warning','Invalid data')
+        ->with('warning',lang('App.messages.invalid'))
         ->withInput();
      }
      
