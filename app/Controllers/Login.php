@@ -17,12 +17,12 @@ class Login extends BaseController{
         $redirect_url = session('redirect_url') ?? '/';
         unset($_SESSION['redirect_url']);
         return redirect()->to($redirect_url)
-        ->with('info','Login Successful')
+        ->with('info',lang('Login.successful'))
         ->withCookies();
       }else{
         return redirect()->back()
         ->withInput()
-        ->with('warning','Invalid Login');
+        ->with('warning',lang('Login.invalid'));
       }
     }
 
@@ -35,6 +35,6 @@ class Login extends BaseController{
 
     public function showLogoutMessage(){
       return redirect()->to('/')
-      ->with('info','Logout successful');
+      ->with('info',lang('Login.logout_successful'));
     }
 }

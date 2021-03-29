@@ -14,10 +14,10 @@ class Password extends BaseController{
       $user->startPasswordReset();
       $model->save($user);
       $this->sendResetEmail($user);
-      return redirect()->to("/password/resetsent");
+      return redirect()->to("{$this->locale}/password/resetsent");
     }else{
       return redirect()->back()
-      ->with('warning','No active user found with that email address')
+      ->with('warning', lang('Password.no_user_found'))
       ->withInput();
     }
   }
@@ -34,7 +34,7 @@ class Password extends BaseController{
       return view('Password/reset',['token'=>$token]);
     }else{
       return redirect()->to('/password/forgot')
-      ->with('warning','Link invalid or has expired, Please try again');
+      ->with('warning', lang('Password.invalid_link'));
     }
   }
 
@@ -51,11 +51,11 @@ class Password extends BaseController{
       }else{
         return redirect()->back()
         ->with('errors', $model->errors())
-        ->with('warning','Invalid data');
+        ->with('warning',lang('App.messages.invalid'));
       }
     }else{
       return redirect()->to('/password/forgot')
-        ->with('warning','Link invalid or has expired. Please try again');
+        ->with('warning', lang('Password.invalid_link'));
     }
   }
 
@@ -68,7 +68,7 @@ class Password extends BaseController{
     $headers = "MIME-Version: 1.0\r\n";
     $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
 
-    $sub = "Password Reset";
+    $sub = lang('Password.email_subject');
     $rec = $user->email;
     $message = view('Password/reset_email',
     ['token'=>$user->reset_token]);
