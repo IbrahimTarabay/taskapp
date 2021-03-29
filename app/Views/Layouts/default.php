@@ -11,55 +11,73 @@
 <body>
 
 <section class="section">
-  <nav class="navbar" role="navigation" aria-label="main navigation">
-   <div class="navbar-menu">
-    <div class="navbar-start">
-     <a class="navbar-item" href="<?= site_url("/") ?>">Home</a>
-    </div>
+    
+    <nav class="navbar" role="navigation" aria-label="main navigation">
 
-  <div class="navbar-end">
-    <?php if(current_user()): ?>
-        <div class="navbar-item">Hello <?= esc(current_user()->name)?></div>
-        <a class="navbar-item" href="<?= site_url("/profile/show") ?>">Profile</a>
-        
-        <?php if(current_user()->is_admin): ?>
-        <a class="navbar-item" href="<?= site_url("/admin/users") ?>">Users</a>
-        <?php endif; ?>
+        <div class="navbar-menu">
 
-        <a class="navbar-item" href="<?= site_url("/tasks") ?>">Tasks</a>
-        <a class="navbar-item" href="<?= site_url("/logout") ?>">Log out</a>
-      <?php else: ?>
-        <a class="navbar-item" href="<?= site_url("/signup")?>">Sign up</a>
-        <a class="navbar-item" href="<?= site_url("/login")?>">Login</a>  
-      <?php endif; ?> 
-    </div>
-   </div>
-  </nav>
+            <div class="navbar-start">
 
-  <?php if(session()->has('warning')): ?>
-    <div class="notification is-warning is-light">
-      <button class="delete"></button>
-      <?= session('warning'); ?>
-    </div>
-  <?php endif; ?>  
-  
-  <?php if(session()->has('info')): ?>
-    <div class="notification is-info is-light">
-      <button class="delete"></button>
-      <?= session('info'); ?>
-    </div>
-  <?php endif; ?> 
+                <a class="navbar-item" href="<?= site_url('/') ?>"><?= lang('App.nav.home') ?></a>
+                
+            </div>
 
-  <?php if(session()->has('error')): ?>
-    <div class="notification is-danger is-light">
-      <button class="delete"></button>
-      <?= session('error'); ?>
-    </div>
-  <?php endif; ?> 
+            <div class="navbar-end">
 
-  <?= $this->renderSection("content") ?>
- 
- </section>
+                <?php if (current_user()): ?>
+                    
+                    <div class="navbar-item">
+                        <?= lang('App.nav.hello') ?>, <?= esc(current_user()->name) ?>
+                    </div>
+                    
+                    <a class="navbar-item" href="<?= site_url("/profile/show") ?>"><?= lang('App.nav.profile') ?></a>
+                    
+                    <?php if (current_user()->is_admin): ?>
+                        
+                        <a class="navbar-item" href="<?= site_url("/admin/users") ?>"><?= lang('App.nav.users') ?></a>
+                        
+                    <?php endif; ?>
+                    
+                    <a class="navbar-item" href="<?= site_url("/tasks") ?>"><?= lang('App.nav.tasks') ?></a>
+
+                    <a class="navbar-item" href="<?= site_url("/logout") ?>"><?= lang('App.nav.logout') ?></a>
+                    
+                <?php else: ?>
+                    
+                    <a class="navbar-item" href="<?= site_url("/$locale/signup") ?>"><?= lang('App.nav.signup') ?></a>
+
+                    <a class="navbar-item" href="<?= site_url("/$locale/login") ?>"><?= lang('App.nav.login') ?></a>
+                    
+                <?php endif; ?>
+
+            </div>
+        </div>
+    </nav>
+
+    <?php if (session()->has('warning')): ?>
+        <div class="notification is-warning is-light">
+            <button class="delete"></button>
+            <?= session('warning') ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if (session()->has('info')): ?>
+        <div class="notification is-info is-light">
+            <button class="delete"></button>
+            <?= session('info') ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if (session()->has('error')): ?>
+        <div class="notification is-danger is-light">
+            <button class="delete"></button>
+            <?= session('error') ?>
+        </div>
+    <?php endif; ?>
+
+    <?= $this->renderSection("content") ?>
+    
+</section>
 
  <script src="<?= site_url('/js/app.js') ?>"></script>
 
