@@ -31,10 +31,14 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
-$routes->get('{locale}/signup','Signup::new', ['filter'=>'guest']);
-$routes->post('{locale}/signup/create','Signup::create', ['filter'=>'guest']);
-$routes->get('{locale}/signup/success','Signup::success', ['filter'=>'guest']);
-$routes->get('{locale}/signup/activate/(:alphanum)','Signup::activate/$1');
+
+$routes->group('{locale}', function($routes){
+	$routes->get('signup','Signup::new', ['filter'=>'guest']);
+	$routes->post('signup/create','Signup::create', ['filter'=>'guest']);
+	$routes->get('signup/success','Signup::success', ['filter'=>'guest']);
+	$routes->get('signup/activate/(:alphanum)','Signup::activate/$1');
+});
+
 $routes->get('/login', 'Login::new', ['filter'=>'guest']);
 $routes->get('/logout','Login::delete');
 
