@@ -2,9 +2,10 @@
 
 class Home extends BaseController
 {
-	public function index()
+	public function index($locale='')
 	{
-		//echo view("header"); 
+		//echo view("header");
+		$this->request->setLocale($locale); 
 		return view("Home/index");
 	}
 
