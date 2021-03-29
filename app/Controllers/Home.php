@@ -4,6 +4,9 @@ class Home extends BaseController
 {
 	public function index($locale='')
 	{
+        if($locale === ''){
+         return redirect()->to($this->locale);
+		}
 		//echo view("header");
 		$this->request->setLocale($locale); 
 		return view("Home/index");

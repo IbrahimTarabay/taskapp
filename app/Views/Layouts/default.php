@@ -19,6 +19,10 @@
             <div class="navbar-start">
 
                 <a class="navbar-item" href="<?= site_url('/') ?>"><?= lang('App.nav.home') ?></a>
+
+                <a class="navbar-item" href="<?= site_url('/en') ?>">English</a>
+                
+                <a class="navbar-item" href="<?= site_url('/es') ?>">Español</a>
                 
             </div>
 
