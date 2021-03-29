@@ -28,6 +28,8 @@ class BaseController extends Controller
 	 */
 	protected $helpers = ['form','auth'];
 
+	protected $locale;
+
 	/**
 	 * Constructor.
 	 */
@@ -35,9 +37,11 @@ class BaseController extends Controller
 	{
 		// Do Not Edit This Line
 		parent::initController($request, $response, $logger);
+        
+        $this->locale = $request->getLocale();
 
 		$view = service('renderer');
-        $view->setVar('locale', $request->getLocale());
+        $view->setVar('locale', $this->locale);
 		//--------------------------------------------------------------------
 		// Preload any models, libraries, etc, here.
 		//--------------------------------------------------------------------

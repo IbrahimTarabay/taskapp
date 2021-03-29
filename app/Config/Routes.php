@@ -33,6 +33,7 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Home::index');
 $routes->get('{locale}/signup','Signup::new', ['filter'=>'guest']);
 $routes->post('{locale}/signup/create','Signup::create', ['filter'=>'guest']);
+$routes->get('{locale}/signup/success','Signup::success', ['filter'=>'guest']);
 $routes->get('/login', 'Login::new', ['filter'=>'guest']);
 $routes->get('/logout','Login::delete');
 

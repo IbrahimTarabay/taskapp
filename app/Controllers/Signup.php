@@ -15,7 +15,7 @@ class Signup extends BaseController{
 
      if($model->insert($user)){
         $this->sendActivationEmail($user);
-        return redirect()->to("/signup/success");
+        return redirect()->to("/{$this->locale}/signup/success");
      }else{
         return redirect()->back()
         ->with('errors',$model->errors())
@@ -40,7 +40,7 @@ class Signup extends BaseController{
     $headers = "MIME-Version: 1.0\r\n";
     $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
 
-    $sub = "Account Activation";
+    $sub = lang('Signup.activation');
     $rec = $user->email;
     $message = view('Signup/activation_email',
     ['token'=>$user->token]);
