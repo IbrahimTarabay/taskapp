@@ -12,4 +12,5 @@ return [
     'activation' => 'Activar cuenta',
     'activation_message' => 'Por favor, haz clic en el siguiente enlace para activar tu cuenta:',
     'activate_link' => 'Activa cuenta',
+    'activation_success' => 'Cuenta activada con éxito'
 ];
